@@ -46,6 +46,16 @@ body {
   position: relative;
 }
 
+/* prevent hover discontinuity*/
+.group::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: 12px;
+}
+
 /* dropdown */
 .sub {
   display: none;
