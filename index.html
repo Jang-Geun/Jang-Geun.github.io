@@ -156,8 +156,8 @@ html {
   <div class="group">
     <a>Project ▾</a>
     <div class="sub">
-	    <!--<a href="gbms.html">Great Bay Modeling System</a>-->
-      <a href="#" id="gbms-link">Great Bay Modeling System</a>
+      <a data-page="gbms.html">Great Bay Modeling System</a>
+      <!--<a href="#" id="gbms-link">Great Bay Modeling System</a>-->
     </div>
   </div>
 
@@ -166,18 +166,20 @@ html {
 <!-- content -->
 <div id="content">Loading...</div>
 
-<div id="gbms-container" style="display:none;">
-    <iframe
-        src="gbms.html"
-        style="width:100%; height:1000px; border:none;">
-    </iframe>
-</div>
-
 <script>
 const links = document.querySelectorAll("[data-page]");
 const content = document.getElementById("content");
 
 function loadPage(page) {
+    if (page === "gbms.html") {
+        content.innerHTML = `
+            <iframe
+                src="gbms.html"
+                style="width:100%; height:1000px; border:none;">
+            </iframe>
+        `;
+        return;
+    }
   fetch(page)
     .then(res => res.text())
     .then(html => {
