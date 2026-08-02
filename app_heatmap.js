@@ -1,3 +1,4 @@
+console.log("HEATMAP START");
 const n = 15;
 const C = [];
 
@@ -23,11 +24,11 @@ const T = valuesT.map(value =>
 const x = Array.from({length: 245}, (_, i) => i + 1);
 const y = Array.from({length: 326}, (_, i) => i + 1);
 
-const loading = document.getElementById("loading");
+//const loading = document.getElementById("loading");
 
-if (loading) {
-    loading.style.display = "none";
-}
+//if (loading) {
+//    loading.style.display = "none";
+//}
 
 function drawPlot() {
 
@@ -121,8 +122,9 @@ const layout = {
 //	    constrain: "domain"
 //	    }
 //    };
-
+    console.log("BEFORE PLOT");
     Plotly.newPlot("plot", plotData, layout, {responsive: true});
+    console.log("AFTER PLOT");
 }
 
 function changeTime(hours) {
