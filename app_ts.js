@@ -1,6 +1,6 @@
 // Read data
 
-const response1 = await fetch("gbms_rom/cfs.txt");
+const response1 = await fetch("cfs.txt");
 const text1 = await response1.text();
 
 const values1 = text1.trim().split(/\s+/);
@@ -22,7 +22,7 @@ const values1 = text1.trim().split(/\s+/);
 	const B7 = Number(values1[14]);
 
 
-const response2 = await fetch("gbms_rom/T.txt");
+const response2 = await fetch("T.txt");
 const text2 = await response2.text();
 const values2 = text2.trim().split(/\s+/);
 

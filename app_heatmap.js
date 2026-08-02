@@ -2,7 +2,7 @@ const n = 15;
 const C = [];
 
 for (let i = 1; i <= n; i++) {
-    const response = await fetch(`gbms_rom/C${i}.txt`);
+    const response = await fetch(`C${i}.txt`);
     const text = await response.text();
 
     const Z = text.trim().split("\n").map(line =>
@@ -12,7 +12,7 @@ for (let i = 1; i <= n; i++) {
     C.push(Z);
 }
 
-const responseT = await fetch("gbms_rom/T.txt");
+const responseT = await fetch("T.txt");
 const textT = await responseT.text();
 const valuesT = textT.trim().split(/\s+/);
 
