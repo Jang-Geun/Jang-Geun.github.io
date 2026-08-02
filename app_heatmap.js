@@ -23,13 +23,11 @@ const T = valuesT.map(value =>
 const x = Array.from({length: 245}, (_, i) => i + 1);
 const y = Array.from({length: 326}, (_, i) => i + 1);
 
-const yourData = [
-    [1, 2, 3],
-    [2, 3, 4],
-    [3, 4, 5]
-];
+const loading = document.getElementById("loading");
 
-document.getElementById("loading").style.display = "none";
+if (loading) {
+    loading.style.display = "none";
+}
 
 function drawPlot() {
 
