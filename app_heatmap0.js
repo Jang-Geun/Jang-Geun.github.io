@@ -1,8 +1,9 @@
+console.log("HEATMAP START");
 const n = 15;
 const C = [];
 
 for (let i = 1; i <= n; i++) {
-    const response = await fetch(`gbms_rom/C${i}.txt`);
+    const response = await fetch(`C${i}.txt`);
     const text = await response.text();
 
     const Z = text.trim().split("\n").map(line =>
@@ -12,7 +13,7 @@ for (let i = 1; i <= n; i++) {
     C.push(Z);
 }
 
-const responseT = await fetch("gbms_rom/T.txt");
+const responseT = await fetch("T.txt");
 const textT = await responseT.text();
 const valuesT = textT.trim().split(/\s+/);
 
@@ -23,9 +24,13 @@ const T = valuesT.map(value =>
 const x = Array.from({length: 245}, (_, i) => i + 1);
 const y = Array.from({length: 326}, (_, i) => i + 1);
 
-document.getElementById("loading").style.display = "none";
+//const loading = document.getElementById("loading");
 
-export function drawPlot() {
+//if (loading) {
+//    loading.style.display = "none";
+//}
+
+function drawPlot() {
 
     const d0 = new Date("2006-01-01T00:00:00");
 
@@ -104,32 +109,49 @@ const layout = {
         zeroline: false
     }}
 
+//    const layout = {
+//	autosize: true,
+//       xaxis: {
+//	    scaleanchor: "y",
+//            scaleratio: 1,
+//	    constrain: "domain",
+//	    range: [x[0], x[x.length - 1]]
+//	    },
+//	yaxis: {
+//	    range: [y[0], y[y.length - 1]],
+//	    constrain: "domain"
+//	    }
+//    };
+    console.log("BEFORE PLOT");
     Plotly.newPlot("plot", plotData, layout, {responsive: true});
+    console.log("AFTER PLOT");
 }
 
-//function changeTime(hours) {
-//    const input = document.getElementById("centerTime");
-//    const d = new Date(input.value);
-//
-//    d.setHours(d.getHours() + hours);
-//
-//    input.value =
-//        d.getFullYear() + "-" +
-//        String(d.getMonth() + 1).padStart(2, "0") + "-" +
-//        String(d.getDate()).padStart(2, "0") + "T" +
-//        String(d.getHours()).padStart(2, "0") + ":" +
-//        String(d.getMinutes()).padStart(2, "0");
-//
-//    drawPlot();
-//}
-//
-//document.getElementById("centerTime")
-//    .addEventListener("input", drawPlot);
-//
-//document.getElementById("up")
-//    .addEventListener("click", () => changeTime(1));
-//
-//document.getElementById("down")
-//    .addEventListener("click", () => changeTime(-1));
-//
+function changeTime(hours) {
+    const input = document.getElementById("centerTime");
+    const d = new Date(input.value);
+
+    d.setHours(d.getHours() + hours);
+
+    input.value =
+        d.getFullYear() + "-" +
+        String(d.getMonth() + 1).padStart(2, "0") + "-" +
+        String(d.getDate()).padStart(2, "0") + "T" +
+        String(d.getHours()).padStart(2, "0") + ":" +
+        String(d.getMinutes()).padStart(2, "0");
+
+    drawPlot();
+}
+
+document.getElementById("centerTime")
+    .addEventListener("input", drawPlot);
+
+document.getElementById("up")
+    .addEventListener("click", () => changeTime(1));
+
+document.getElementById("down")
+    .addEventListener("click", () => changeTime(-1));
+
+//document.getElementById("up").onclick = () => changeTime(1);
+//document.getElementById("down").onclick = () => changeTime(-1);
 drawPlot();

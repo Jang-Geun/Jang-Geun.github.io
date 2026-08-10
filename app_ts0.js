@@ -1,6 +1,6 @@
 // Read data
 
-const response1 = await fetch("gbms_rom/cfs.txt");
+const response1 = await fetch("cfs.txt");
 const text1 = await response1.text();
 
 const values1 = text1.trim().split(/\s+/);
@@ -22,7 +22,7 @@ const values1 = text1.trim().split(/\s+/);
 	const B7 = Number(values1[14]);
 
 
-const response2 = await fetch("gbms_rom/T.txt");
+const response2 = await fetch("T.txt");
 const text2 = await response2.text();
 const values2 = text2.trim().split(/\s+/);
 
@@ -34,7 +34,7 @@ const values2 = text2.trim().split(/\s+/);
         const T6 = Number(values2[5])/24/60/60;
         const T7 = Number(values2[6])/24/60/60;
 
-export function drawPlot2() {
+function drawPlot2() {
         // Create x
         //const d  = new Date("2021-11-20T00:00:00");
         const d0 = new Date("2006-01-01T00:00:00");
@@ -106,29 +106,29 @@ export function drawPlot2() {
         Plotly.newPlot("plot2", plotData, layout, {responsive: true});
 }
 
-//function changeTime(hours) {
-//    const input = document.getElementById("centerTime");
-//    const d = new Date(input.value);
-//
-//    d.setHours(d.getHours() + hours);
-//
-//    input.value =
-//        d.getFullYear() + "-" +
-//        String(d.getMonth() + 1).padStart(2, "0") + "-" +
-//        String(d.getDate()).padStart(2, "0") + "T" +
-//        String(d.getHours()).padStart(2, "0") + ":" +
-//        String(d.getMinutes()).padStart(2, "0");
-//
-//    drawPlot2();
-//}
-//
-//document.getElementById("centerTime")
-//    .addEventListener("input", drawPlot2);
-//
-//document.getElementById("up")
-//    .addEventListener("click", () => changeTime(1));
-//
-//document.getElementById("down")
-//    .addEventListener("click", () => changeTime(-1));
-//
+function changeTime(hours) {
+    const input = document.getElementById("centerTime");
+    const d = new Date(input.value);
+
+    d.setHours(d.getHours() + hours);
+
+    input.value =
+        d.getFullYear() + "-" +
+        String(d.getMonth() + 1).padStart(2, "0") + "-" +
+        String(d.getDate()).padStart(2, "0") + "T" +
+        String(d.getHours()).padStart(2, "0") + ":" +
+        String(d.getMinutes()).padStart(2, "0");
+
+    drawPlot2();
+}
+
+document.getElementById("centerTime")
+    .addEventListener("input", drawPlot2);
+
+document.getElementById("up")
+    .addEventListener("click", () => changeTime(1));
+
+document.getElementById("down")
+    .addEventListener("click", () => changeTime(-1));
+
 drawPlot2();
